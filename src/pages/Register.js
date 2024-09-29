@@ -11,9 +11,10 @@ import PasswordIcon from '@mui/icons-material/Password';
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
-const Login = (props) => {
+const Register = (props) => {
   return (
-    <div>
+    <div >
+      
       <Dialog
         open={props.open}
         TransitionComponent={Transition}
@@ -21,9 +22,35 @@ const Login = (props) => {
         onClose={props.handleclose}
         aria-describedby="alert-dialog-slide-description"
       >
-        <DialogTitle className="text-center font-bold">{"Login"}</DialogTitle>
+        <DialogTitle className="text-center font-bold">{"Sign Up"}</DialogTitle>
 
         <DialogContent className="w-96">
+          <div className="py-2 flex">
+            <div className="login_icon">
+              <AccountCircle className="" sx={{ color: "white" }} />
+            </div>
+
+            <FormControl fullWidth>
+              <TextField
+                id="outlined-password-input"
+                label="FirstName"
+                type="text"
+              />
+            </FormControl>
+          </div>
+          <div className="py-2 flex">
+            <div className="login_icon">
+              <AccountCircle className="" sx={{ color: "white" }} />
+            </div>
+
+            <FormControl fullWidth>
+              <TextField
+                id="outlined-password-input"
+                label="LastName"
+                type="text"
+              />
+            </FormControl>
+          </div>
           <div className="py-2 flex">
             <div className="login_icon">
               <AccountCircle className="" sx={{ color: "white" }} />
@@ -37,7 +64,7 @@ const Login = (props) => {
               />
             </FormControl>
           </div>
-          <div className="flex">
+          <div className="py-2 flex">
           <div className="login_icon">
               <PasswordIcon className="" sx={{ color: "white" }} />
             </div>
@@ -45,6 +72,18 @@ const Login = (props) => {
               <TextField
                 id="outlined-password-input"
                 label="Password"
+                type="password"
+              />
+            </FormControl>
+          </div>
+          <div className="py-2 flex">
+          <div className="login_icon">
+              <PasswordIcon className="" sx={{ color: "white" }} />
+            </div>
+            <FormControl fullWidth>
+              <TextField
+                id="outlined-password-input"
+                label="Confirm Password"
                 type="password"
               />
             </FormControl>
@@ -59,7 +98,7 @@ const Login = (props) => {
                   color: "white",
                 }}
               >
-                Login
+                Sign Up
               </Button>
             </FormControl>
           </div>
@@ -69,4 +108,4 @@ const Login = (props) => {
   );
 };
 
-export default Login;
+export default Register;

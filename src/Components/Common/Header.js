@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState} from "react";
 import SearchBar from "../Specific/SearchBar";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -14,13 +14,16 @@ import MailIcon from "@mui/icons-material/Mail";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import Button from "@mui/material/Button";
+import Login from "../../pages/Login";
+import Register from "../../pages/Register";
 
-
-
-const Header = () => {
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
-
+const Header = ({ handleClickOpen }) => {
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
+  const[Openlogindialog,setOpenlogindialog] = useState(false);
+  const[Openlogin,setOpenlogin] = useState(false);
+  const[OpenRegisterdialog,setOpenRegisterdialog] = useState(false);
+  const[OpenRegister,setOpenRegister] = useState(false);
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
@@ -39,6 +42,21 @@ const Header = () => {
 
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
+  };
+
+  const handleopenlogin = () =>{
+    setOpenlogindialog(true);
+    setOpenlogin(true);
+  }
+  const handleopenRegister = () =>{
+    setOpenRegisterdialog(true);
+    setOpenRegister(true);
+  }
+  const handlecloselogin = () => {
+    setOpenlogin(false);
+  };
+  const handlecloseRegister = () => {
+    setOpenRegister(false);
   };
 
   const menuId = "primary-search-account-menu";
@@ -118,7 +136,7 @@ const Header = () => {
     <div>
       <Box sx={{ flexGrow: 1 }}>
         <AppBar position="static">
-          <Toolbar>
+          <Toolbar className="bg-primary">
             <IconButton
               size="large"
               edge="start"
@@ -140,11 +158,33 @@ const Header = () => {
             <Box
               sx={{ flexGrow: 1, display: "flex", justifyContent: "center" }}
             >
-              <SearchBar/>
+              <SearchBar />
             </Box>
             {/* <Box sx={{ flexGrow: 1 }} /> */}
-
-            <a href="#Login" className="btn-login"><Typography className="border-b-2">Login / Sign-Up</Typography></a>
+            <div className="flex">
+            <Button
+              //className="btn-login"
+              onClick={handleopenlogin}
+              style={{color:"white",borderColor:"white"}}
+              variant="outlined"
+              
+            > 
+              {/* <Typography>Login / Sign-Up</Typography> */}
+              Login
+            </Button>
+            <Typography className="text-center px-3 py-2">or</Typography>
+            <Button
+              //className="btn-login"
+              onClick={handleopenRegister}
+              style={{color:"white",borderColor:"white"}}
+              variant="outlined"
+              
+            > 
+              {/* <Typography>Login / Sign-Up</Typography> */}
+              SignUp
+            </Button>
+            </div>
+           
             <Box sx={{ display: { xs: "none", md: "flex" } }}>
               <IconButton
                 size="large"
@@ -192,6 +232,12 @@ const Header = () => {
         {renderMobileMenu}
         {renderMenu}
       </Box>
+      {Openlogindialog &&(
+        <Login open = {Openlogin} handleclose={handlecloselogin}/>
+      )}
+      {OpenRegisterdialog &&(
+        <Register open = {OpenRegister} handleclose={handlecloseRegister}/>
+      )}
     </div>
   );
 };
